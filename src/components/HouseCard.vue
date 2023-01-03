@@ -4,9 +4,9 @@
             <img :src="house.imageUrl" >
         </div>
         <div class="box-info">
-            <h6>{{ house.country }}</h6>
+            <h6>{{ house.houseAddress }},{{ house.country }}</h6>
             <p>{{ house.price }} €/noche</p>
-            <p>{{ house.score }} <img src="./icons/star.svg" alt="star" style="width: 5%;"></p>
+            <p>{{ house.score }} <img src="./icons/star.svg" alt="star" style="width: 1vw;"></p>
         </div>
     </div>
 
@@ -38,12 +38,12 @@ export default{
         color: var(--dark);
     }
     p{
-        font-size: 2vw;
+        font-size: 1vw;
     }
     h6{
-        font-size: 2vw;
+        font-size: 1vw;
     }
     .box-info{
-        margin: 1vw;
+       margin: 1vw 1vw;
     }
 </style>

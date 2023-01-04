@@ -31,7 +31,7 @@ export default{
     }
     .box {
         background-color: var(--light);
-        width: 333px;
+        width: 300px;
         margin: 2vw;
         height: 333px;
         border-radius: 1vw;

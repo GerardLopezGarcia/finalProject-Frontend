@@ -17,32 +17,80 @@
       </span>
     </div>
   </section>
-  <section class="house-items-section">
+
+  <section class="section">
     <ul class="house-grid">
       <li v-for="(house,index) in houses" :key="index" >
         <HouseComponent :house="houses[index]"/>
       </li>
     </ul>
   </section>
-  <br>
-  <!-- <img :src="this.houses[0].imageUrl" > -->
-  <p>{{ houses }}</p>
-  <div>
-    <!-- <div v-for="item in  this.houses[0].houseImages">
-    <img  :src="item.url" width="400">
-    </div> -->
-  </div>
 
+  <section class="section mid-banner">
+    <span class="mid-banner-flex">
+      <h2>Not sure where to go? <br> Perfect.</h2>
+      <a href="#" class="btn btn-dark">I'm flexible</a>
+    </span>
+  </section>
+
+  <section class="section live-anywhere">
+    <h2>Live anywhere</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-img">
+          <img src="./components/icons/polaris.jpg" alt="outdoor image" style="width: 100%;">
+        </div>
+        <span>
+          <h3>Outdoor getaways</h3>
+        </span>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="./components/icons/polaris.jpg" alt="outdoor image" style="width: 100%;">
+        </div>
+        <span>
+          <h3>Outdoor getaways</h3>
+        </span>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="./components/icons/polaris.jpg" alt="outdoor image" style="width: 100%;">
+        </div>
+        <span>
+          <h3>Outdoor getaways</h3>
+        </span>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="./components/icons/polaris.jpg" alt="outdoor image" style="width: 100%;">
+        </div>
+        <span>
+          <h3>Outdoor getaways</h3>
+        </span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+    <p>{{ houses }}</p>
+  </section>
+
+  
+
+  <Footer/>
   
 </template>
 
 <script>
 import HouseComponent from "./components/HouseCard.vue"
+import Footer from "./components/Footer.vue"
 
 
   export default {
     components: {
-      HouseComponent
+      HouseComponent,
+      Footer
     },
 
     data(){
@@ -75,7 +123,9 @@ import HouseComponent from "./components/HouseCard.vue"
     --white: #112;
     --light: #fafafc;
     --gray: #002;
-    --sidePadding: 3rem;
+    --brown: #3f3f1a;
+    --yellow: #ffffd6;
+    --sidePadding: 8rem;
     --maxWidth: 40%;
     --containerWidth: 1200px;
     
@@ -153,22 +203,75 @@ import HouseComponent from "./components/HouseCard.vue"
   }
 
   /* house items section  -------*/
-  .house-items-section {
-    margin-top: 4vw;
+  .section {
+    /* margin-top: 4vw;
     margin-left: 11vw;
-    margin-left: 11vw;
-    margin-bottom: 4vw;
+    margin-right: 11vw;
+    margin-bottom: 4vw; */
+    margin: 3rem var(--sidePadding) 0;
+    
   }
   .house-grid{
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
   }
   ul {
     list-style: none;
   }
 
+/* mid banner section */
 
+.mid-banner{
+  color: var(--brown);
+  padding: 6rem var(--sidePadding);
+  border-radius: 1rem;
+  background: url("./components/icons/banner.jpg") 0% 0% / cover;
+  background-position: center;
+}
+.mid-banner h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+.btn-dark{
+    --bgcolor: var(--brown);
+    --color: var(--yellow);
+}
+
+/* live anywhere section */
+.cards{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: -1.5rem;
+  padding: 1.5rem 0px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.card-img{
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  margin: auto;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%; */
+}
 
 
 </style>

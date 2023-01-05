@@ -1,54 +1,49 @@
-<template>>
+<template>
 <div className="footerInner">
-        <span>
-          <h2>About</h2>
-          <ul>
-            <li>How Housing works</li>
-            <li>Newsroom</li>
-            <li>Housing 2021</li>
-            <li>Investors</li>
-            <li>Housing Plus</li>
-            <li>Housing Luxe</li>
-          </ul>
-        </span>
-        <span>
-          <h2>Community</h2>
-          <ul>
-            <li>Diversity & Belonging</li>
-            <li>Accessibility</li>
-            <li>Housing Associates</li>
-            <li>Frontline Stays</li>
-            <li>Guest Referrals</li>
-            <li>Housing.org</li>
-          </ul>
-        </span>
-        <span>
-          <h2>Host</h2>
-          <ul>
-            <li>Host your home</li>
-            <li>Host an Online Experience</li>
-            <li>Host an Experience</li>
-            <li>Responsible hosting</li>
-            <li>Resource Centre</li>
-            <li>Community Centre</li>
-          </ul>
-        </span>
-        <span>
-          <h2>Support</h2>
-          <ul>
-            <li>Our COVID-19 Response</li>
-            <li>Help Centre</li>
-            <li>Cancellation options</li>
-            <li>Neighbourhood Support</li>
-            <li>Trust & Safety</li>
-          </ul>
-        </span>
-        <span className="footer-bottom">
-          <p>
-            <ThemeToggle text />
-          </p>
-        </span>
-      </div>
+  <span>
+    <h2>About</h2>
+    <ul>
+      <li>How Housing works</li>
+      <li>Newsroom</li>
+      <li>Housing 2021</li>
+      <li>Investors</li>
+      <li>Housing Plus</li>
+      <li>Housing Luxe</li>
+    </ul>
+  </span>
+  <span>
+    <h2>Community</h2>
+    <ul>
+      <li>Diversity & Belonging</li>
+      <li>Accessibility</li>
+      <li>Housing Associates</li>
+      <li>Frontline Stays</li>
+      <li>Guest Referrals</li>
+      <li>Housing.org</li>
+    </ul>
+  </span>
+  <span>
+    <h2>Host</h2>
+    <ul>
+      <li>Host your home</li>
+      <li>Host an Online Experience</li>
+      <li>Host an Experience</li>
+      <li>Responsible hosting</li>
+      <li>Resource Centre</li>
+      <li>Community Centre</li>
+    </ul>
+  </span>
+  <span>
+    <h2>Support</h2>
+    <ul>
+      <li>Our COVID-19 Response</li>
+      <li>Help Centre</li>
+      <li>Cancellation options</li>
+      <li>Neighbourhood Support</li>
+      <li>Trust & Safety</li>
+    </ul>
+  </span>
+</div>
 
 </template>
 

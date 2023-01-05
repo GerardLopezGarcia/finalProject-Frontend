@@ -31,9 +31,9 @@ export default{
     }
     .box {
         background-color: var(--light);
-        width: 300px;
+        width: 19rem;
         margin: 2vw;
-        height: 333px;
+        height: 19rem;
         border-radius: 1vw;
         color: var(--dark);
     }

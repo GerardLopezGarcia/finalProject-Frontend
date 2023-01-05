@@ -2,7 +2,9 @@
       <header>
     <div class="headerInner">
       <div class="div-logo">
-        <img src="https://img.icons8.com/material/2x/hut.png" alt="logo" class="logo">
+        <router-link to="/">
+            <a href="#"><img src="https://img.icons8.com/material/2x/hut.png" alt="logo" class="logo"></a>
+        </router-link>
         <span >The housing App</span>
       </div>
       <div class="profile">

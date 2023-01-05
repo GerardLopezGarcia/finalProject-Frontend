@@ -5,15 +5,15 @@
 
     <section class="section">
       <ul class="house-grid">
-        <li v-for="(house,index) in houses" :key="index" >
+        <li v-for="(house,index) in houses" :key="index" @mouseenter="focus"  @mouseleave="unfocus">
           <HouseCard :house="houses[index]"/>
         </li>
       </ul>
     </section>
 
-    <MidBanner/>
-    <LiveAnywhere/>
-    <LastBanner/>
+    <MidBanner :kiss="kiss" :unfocus="unfocus"/>
+    <LiveAnywhere :focus="focus" :unfocus="unfocus"/>
+    <LastBanner :kiss="kiss" :unfocus="unfocus"/>
     <Footer/>
   </div>
 </template>
@@ -29,7 +29,13 @@
   import { mapState, mapActions } from "pinia";
   import { useStoreStore } from "../store/store";
   import { useUsersStore } from "../store/users";
-
+  //animation
+  import {gsap} from "gsap"
+  import { CSSPlugin } from 'gsap/CSSPlugin'
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  import 'animate.css';
+  gsap.registerPlugin(CSSPlugin);
+  gsap.registerPlugin(ScrollTrigger);
 
 
     export default {
@@ -58,12 +64,41 @@
       // gives access to this.fetchAll()
       ...mapActions(useStoreStore, ['fetchAll']),
       ...mapActions(useUsersStore, ['fetchAllUsers']),
+      focus(event){
+          gsap.to(event.target,{ duration: .4, scale:1.1 })
+        },
+      unfocus(event){
+        gsap.to(event.target,{ duration: .4, scale:1 })
+      },
+      kiss(event){
+        gsap.from(event.target,{ duration: .7, scaleY:0.4 })
+        console.log("kissin");
+      }
       },
       async created(){
         document.querySelector("html").style.background = "#1e1e38"
+
+
       },
       async mounted(){
+        //llamada al backend
         this.fetchAll()
+
+        //animaciones con gsap
+        //inicial
+        const web_init = gsap.timeline()
+        web_init.from('.jumbotron',{duration:.6,opacity:0.3}).from('.main-title',{duration:.6, x: "200%",opacity:0,stagger:0.2})
+        //scroll
+        const tl_1 = gsap.timeline({
+          scrollTrigger:{
+              trigger:'.jumbotron',
+              toggleActions:'play play none reverse',
+              markers:true,
+              start:'bottom center',
+              end:'100% center'
+          }, stagger:0.3
+        });
+        tl_1.to('.main-title',{duration:1,x:"-100%",ease:"bounce.easeOut",opacity:0}).to('#btn-landing',{duration:0.3,x:"100%",opacity:0,ease:"bounce.easeOut"})
       }
 
     }
@@ -100,6 +135,11 @@
       -webkit-user-select: none; /* Safari */
       -ms-user-select: none; /* IE 10 and IE 11 */
       user-select: none; /* Standard syntax */
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
     }
 
     .light{

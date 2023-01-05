@@ -2,26 +2,26 @@
     <section class="section live-anywhere">
     <h2>Live anywhere</h2>
     <div class="cards">
-      <div class="card">
-        <img src="./icons/outdoor.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image">
+      <div class="card" >
+        <img src="./icons/outdoor.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image" @mouseenter="focus" @mouseleave="unfocus">
         <span>
           <h3>Outdoor getaways</h3>
         </span>
       </div>
       <div class="card">
-        <img src="./icons/unique.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image">
+        <img src="./icons/unique.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image" @mouseenter="focus" @mouseleave="unfocus">
         <span>
           <h3>Unique stays</h3>
         </span>
       </div>
       <div class="card">
-        <img src="./icons/entire.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image">
+        <img src="./icons/entire.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image" @mouseenter="focus" @mouseleave="unfocus">
         <span>
           <h3>Entire homes</h3>
         </span>
       </div>
       <div class="card">
-        <img src="./icons//pets.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image">
+        <img src="./icons//pets.jpg" alt="outdoor image" style="width: 100%; border-radius: 1.5rem;" class="innner-card-image" @mouseenter="focus" @mouseleave="unfocus">
         <span>
           <h3>Pets allowed</h3>
         </span>
@@ -31,6 +31,12 @@
 </template>
 
 <script>
+export default {
+  props : {
+    focus: { type: Function },
+    unfocus: { type: Function }
+  }
+}
 </script>
 
 <style>

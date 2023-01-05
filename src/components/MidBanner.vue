@@ -2,14 +2,19 @@
     <section class="section mid-banner">
         <span class="mid-banner-flex">
         <h2>Not sure where to go? <br> Perfect.</h2>
-        <a href="#" class="btn btn-dark">I'm flexible</a>
+        <a href="#" class="btn btn-dark" @mouseenter="kiss" @mouseleave="unfocus">I'm flexible</a>
         </span>
     </section>
 </template>
 
-<scrip>
-
-</scrip>
+<script>
+    export default {
+    props : {
+        kiss: { type: Function },
+        unfocus: { type: Function }
+        }
+    }
+</script>
 
 <style>
 /* mid banner section */

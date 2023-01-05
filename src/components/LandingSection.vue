@@ -2,9 +2,9 @@
     <section class="jumbotron" style="width: 100%;">
         <div class="innerJumbo">
         <span>
-            <h1>Travel anywhere  <br>
-            fast secure and free</h1>
-            <a href="#" class="btn">Explore now</a>
+            <h1 class="main-title" id="main-h1">Travel anywhere </h1> 
+            <h1 class="main-title">fast secure and free</h1>
+            <a href="#" class="btn animate__bounceIn" id="btn-landing">Explore now</a>
         </span>
         </div>
     </section>
@@ -28,5 +28,8 @@
     display: flex;
     max-width: var(--containerWidth);
     margin: 0 auto;
+  }
+  #main-h1{
+    margin-bottom: 0%;
   }
 </style>

@@ -3,13 +3,18 @@
         <span class="mid-banner-flex">
         <h2>Looking for an extra income? <br> Try hosting.</h2>
         <br>
-        <a href="#" class="btn">Learn more</a>
+        <a href="#" class="btn" @mouseenter="kiss" @mouseleave="unfocus">Learn more</a>
         </span>
     </section>
 </template>
 
 <script>
-
+    export default {
+        props : {
+            kiss: { type: Function },
+            unfocus: { type: Function }
+        }
+    }
 </script>
 
 <style>

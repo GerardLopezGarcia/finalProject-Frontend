@@ -8,7 +8,9 @@
         <span >The housing App</span>
       </div>
       <div class="profile">
-        <a href="#">Become a host</a>
+        <router-link to="/profile">
+            <a href="#">Become a host</a>
+        </router-link>
         <div class="color-mode" @click="changeColorMode()">
             {{colorModeIcon}}
         </div>
@@ -58,7 +60,7 @@ import { useStoreStore } from "../store/store";
         padding: 1.5rem var(--sidePadding);
         width: 100%;
         z-index: 10;
-        position: fixed;
+        /* position: fixed; */
         
     }
     .headerInner{

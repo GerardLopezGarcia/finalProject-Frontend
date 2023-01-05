@@ -6,8 +6,8 @@ export const useUsersStore = defineStore('users', {
     user: {}
   }),
   actions: {
-    async fetchAll() {
-        const response = await fetch("https://ih-countries-api.herokuapp.com/countries")
+    async fetchAllUsers() {
+        const response = await fetch('http://localhost:8080/users')
         const usersFetch = await response.json()
         this.users = usersFetch
     }

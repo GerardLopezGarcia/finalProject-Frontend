@@ -28,6 +28,7 @@
   import Footer from "../components/Footer.vue"
   import { mapState, mapActions } from "pinia";
   import { useStoreStore } from "../store/store";
+  import { useUsersStore } from "../store/users";
 
 
 
@@ -44,23 +45,27 @@
 
       data(){
         return{
-          houses : []
+
         }
       },
       
       computed: {    
       // gives read access to this.countries and this.anotherVar
-      ...mapState(useStoreStore, ['colorMode'])
+      ...mapState(useStoreStore, ['colorMode','houses']),
+      ...mapState(useUsersStore, ['users'])
       },
-
-
+      methods: {    
+      // gives access to this.fetchAll()
+      ...mapActions(useStoreStore, ['fetchAll']),
+      ...mapActions(useUsersStore, ['fetchAllUsers']),
+      },
       async created(){
-        const response = await fetch('http://localhost:8080/houses')
-        const data = await response.json()
-        this.houses = await data
-        console.log(this.houses);
-        
+        document.querySelector("html").style.background = "#1e1e38"
+      },
+      async mounted(){
+        this.fetchAll()
       }
+
     }
 </script>
 

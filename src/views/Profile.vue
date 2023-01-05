@@ -1,21 +1,37 @@
 <template>
     <div :class="colorMode">
-    <Header/>
-    <LandingSection/>
+        <div class="img-header-profile">
+        <Header/>
+        </div>
+        <section class="section">
+            <h2> Detalles de la cuenta </h2>
+            <h4>Hola, {{users[1].name}}</h4>
+            <p>Fecha de nacimiento: {{users[1].dateOfBirth}}</p>
+            <p>Dirección: Calle {{users[1].address.street}}, {{users[1].address.houseAddress}} </p>
+            <p>{{users[1].address.city}}</p>
+            <div v-if="users[1].userStatus== 'ONLINE'">
+                <p>Status : online 🌝</p>
+            </div>
+            <div v-else>
+                <p>Status : offline 😴</p>
+            </div>
+            
+        <!-- <ul>
+            <li v-for="(user,index) in users" :key="index" >
+                {{user.name}}
+            </li>
+        </ul> -->
+        </section>
+        <section class="section">
+            <p>{{users}}</p>
+        </section>
+        <br>
+        <Footer/>
+    </div>
 
-    <section class="section">
-      <ul class="house-grid">
-        <li v-for="(house,index) in houses" :key="index" >
-          <HouseCard :house="houses[index]"/>
-        </li>
-      </ul>
-    </section>
 
-    <MidBanner/>
-    <LiveAnywhere/>
-    <LastBanner/>
-    <Footer/>
-  </div>
+
+
 </template>
 
 <script>
@@ -28,6 +44,7 @@
   import Footer from "../components/Footer.vue"
   import { mapState, mapActions } from "pinia";
   import { useStoreStore } from "../store/store";
+  import { useUsersStore } from "../store/users";
 
 
 
@@ -41,31 +58,33 @@
 
       data(){
         return{
-          houses : [],
-          turnable: "#1e1e38"
+            
         }
       },
       computed: {    
       // gives read access to this.countries and this.anotherVar
-      ...mapState(useStoreStore, ['colorMode'])
+      ...mapState(useStoreStore, ['colorMode','houses']),
+      ...mapState(useUsersStore, ['users'])
+      },
+      methods: {    
+      // gives access to this.fetchAll()
+      ...mapActions(useUsersStore, ['fetchAllUsers']),
+      ...mapActions(useStoreStore, ['fetchAll'])
+      },
+      async created() {
+        this.fetchAllUsers();
       }
     }
 </script>
 
-<style >
-
-    html{
-      background: v-bind('turnable');
+<style scoped>
+    header{
+        position: relative;
     }
-    .light{
-      background: var(--light);
-      color: var(--dark);
-      
-    }
-    .dark{
-      background: var(--dark);
-      color: var(--light);
-      height: 100%;
+    .img-header-profile {
+        background: url("../components/icons/forest.jpg");
+        background-size: cover;
+        background-position: 0% 35%;
     }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div className="footerInner">
+<div :class="colorMode">
   <span>
     <h2>About</h2>
     <ul>
@@ -48,6 +48,15 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "pinia";
+import { useStoreStore } from "../store/store";
+
+  export default {
+    computed: {    
+     // gives read access to this.countries and this.anotherVar
+    ...mapState(useStoreStore, ['colorMode'])
+    },
+  }
 </script>
 
 <style scoped>
@@ -57,13 +66,21 @@ h2 {
     margin-bottom: 0.5rem;
     font-weight: 800;
   }
-  .footerInner {
+  .light{
+    padding: 3rem var(--sidePadding);
+    background: var(--light);
+    border-top: 1px solid #0002;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .dark{
     padding: 3rem var(--sidePadding);
     background: var(--gray);
     border-top: 1px solid #0002;
     display: flex;
     justify-content: space-evenly;
   }
+
     ul {
       list-style: none;
       display: grid;

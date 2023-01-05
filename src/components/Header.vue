@@ -7,12 +7,14 @@
       </div>
       <div class="profile">
         <a href="#">Become a host</a>
-        <div class="color-mode">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
+        <div class="color-mode" @click="changeColorMode()">
+            {{colorModeIcon}}
         </div>
-        <div class="user">
+        <div class="user-form" v-if="showForm">
+            <input type="text" placeholder="user" class="input-user">
+            <input type="text" placeholder="password" class="input-password">
+        </div>
+        <div class="user" @click="displayForm()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="userIcon">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
             </svg>
@@ -23,6 +25,26 @@
 </template>
 
 <script>
+import { mapState,mapActions } from "pinia";
+import { useStoreStore } from "../store/store";
+
+    export default {
+        data(){
+            return{
+                showForm: false,
+            }
+        },
+        methods : {
+            displayForm() {
+                this.showForm = (this.showForm == false)? true : false;
+            },
+            //traigo actions de pinia
+            ...mapActions(useStoreStore, ['changeColorMode']),
+        },
+        computed : {
+            ...mapState(useStoreStore, ['colorModeIcon']),
+        }
+    }
 
 </script>
 
@@ -34,7 +56,7 @@
         padding: 1.5rem var(--sidePadding);
         width: 100%;
         z-index: 10;
-        
+        position: fixed;
         
     }
     .headerInner{
@@ -45,6 +67,36 @@
         align-items: center;
 
     }
+    .user-form{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .input-user {
+        padding: 0.2rem;
+        font-size: 1ren;
+        border-width: 1px;
+        border-color: #CCCCCC;
+        background-color: #FFFFFF;
+        color: var(--dark);
+        border-style: solid;
+        border-radius: 9px;
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411);
+        width: 44%;
+     
+    }
+    .input-password {
+        padding: 0.2rem;
+        font-size: 1ren;
+        border-width: 1px;
+        border-color: #CCCCCC;
+        background-color: #FFFFFF;
+        color: var(--dark);
+        border-style: solid;
+        border-radius: 9px;
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411);
+        width: 44%;
+    }
+
     span, a {
         font-weight: 600;
         font-size: 1.15rem;
@@ -76,5 +128,12 @@
     .div-logo{
         display: flex;
         align-items: center;
+    }
+    .user {
+        cursor: pointer;
+    }
+    .color-mode{
+        cursor: pointer;
+        font-size: 1.3rem;
     }
 </style>

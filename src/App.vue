@@ -1,19 +1,22 @@
 <template>
-  <Header/>
-  <LandingSection/>
+  <div :class="colorMode">
+    <Header/>
+    <LandingSection/>
 
-  <section class="section">
-    <ul class="house-grid">
-      <li v-for="(house,index) in houses" :key="index" >
-        <HouseCard :house="houses[index]"/>
-      </li>
-    </ul>
-  </section>
+    <section class="section">
+      <ul class="house-grid">
+        <li v-for="(house,index) in houses" :key="index" >
+          <HouseCard :house="houses[index]"/>
+        </li>
+      </ul>
+    </section>
 
-  <MidBanner/>
-  <LiveAnywhere/>
-  <LastBanner/>
-  <Footer/>
+    <MidBanner/>
+    <LiveAnywhere/>
+    <LastBanner/>
+    <Footer/>
+  </div>
+
   
 </template>
 
@@ -25,6 +28,9 @@ import MidBanner from "./components/MidBanner.vue"
 import LiveAnywhere from "./components/LiveAnywhere.vue"
 import LastBanner from "./components/LastBanner.vue"
 import Footer from "./components/Footer.vue"
+import { mapState, mapActions } from "pinia";
+import { useStoreStore } from "./store/store";
+
 
 
   export default {
@@ -43,6 +49,11 @@ import Footer from "./components/Footer.vue"
         houses : []
       }
     },
+    computed: {    
+     // gives read access to this.countries and this.anotherVar
+    ...mapState(useStoreStore, ['colorMode'])
+    },
+
 
     async created(){
       const response = await fetch('http://localhost:8080/houses')
@@ -75,15 +86,24 @@ import Footer from "./components/Footer.vue"
     --containerWidth: 1200px;
     
   }
+
   body {
     font-family: Nunito Sans,sans-serif;
-    background: var(--light);
-    background: var(--dark);
-    color: var(--dark);
-    color: var(--light);
     line-height: 1.5;
     -webkit-tap-highlight-color: transparent;
     font-size: 1rem;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  .light{
+    background: var(--light);
+    color: var(--dark);
+  }
+  .dark{
+    background: var(--dark);
+    color: var(--light);
   }
 
 

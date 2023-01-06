@@ -2,7 +2,9 @@
     <section class="section mid-banner">
         <span class="mid-banner-flex">
         <h2>Not sure where to go? <br> Perfect.</h2>
-        <a href="#" class="btn btn-dark" @mouseenter="kiss" @mouseleave="unfocus">I'm flexible</a>
+        <router-link :to="`/housecard/${randomPlaceToGo}`" class="router-link">
+            <a href="#" class="btn btn-dark" @mouseenter="kiss" @mouseleave="unfocus">I'm flexible</a>
+        </router-link>
         </span>
     </section>
 </template>
@@ -12,7 +14,15 @@
     props : {
         kiss: { type: Function },
         unfocus: { type: Function }
+    },
+    computed : {
+        //al hacer click en I'm flexible nos propone un sitio al que ir
+        randomPlaceToGo(){
+            return Math.floor(Math.random() * 6);
         }
+    }
+
+        
     }
 </script>
 

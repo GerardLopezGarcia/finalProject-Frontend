@@ -4,7 +4,10 @@
         <span>
             <h1 class="main-title" id="main-h1">Travel anywhere </h1> 
             <h1 class="main-title">fast secure and free</h1>
-            <a href="#" class="btn animate__bounceIn" id="btn-landing">Explore now</a>
+            <router-link to="/housecard/5" class="router-link">
+              <a href="#" class="btn animate__bounceIn" id="btn-landing">Explore now</a>
+            </router-link>
+
         </span>
         </div>
     </section>

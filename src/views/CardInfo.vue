@@ -6,7 +6,7 @@
         </div>
         <section class="section selected-house">
             <a :href="houses[position].imageUrl" target="_blank" id="anchor-img">
-                <img :src="houses[position].imageUrl" class="house-img">
+                <img :src="houses[position].imageUrl" class="house-img" @mouseenter="enlight" @mouseleave="dimm">
             </a>
 
             <div class="house-info">
@@ -32,7 +32,7 @@
                     <ul v-for="(image, index) in houses[position].houseImages" :key="index">
                         <li>
                             <img :src="image.url" style="width: 10rem; border-radius:.2rem; height: 6.8rem; "
-                                class="secondary-image" @click="zoom">
+                                class="secondary-image" @click="zoom" @mouseenter="focus" @mouseleave="unfocus">
                         </li>
 
                     </ul>
@@ -103,6 +103,12 @@ export default {
         },
         unfocus(event) {
             gsap.to(event.target, { duration: .4, scale: 1 })
+        },
+        enlight(event){
+            event.target.style.boxShadow = "8px 18px 28px -10px #645fa8a6";
+        },
+        dimm(event){
+            event.target.style.boxShadow = "";
         }
     },
     async created() {
@@ -169,6 +175,11 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     color: #7670ca;
+
+
+}
+.secondary-image{
+    cursor: pointer;
 }
 
 .details-grid {

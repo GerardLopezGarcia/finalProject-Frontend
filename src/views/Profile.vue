@@ -5,11 +5,11 @@
         </div>
         <section class="section">
             <h2> Detalles de la cuenta </h2>
-            <h4>Hola, {{users[1].name}}</h4>
-            <p>Fecha de nacimiento: {{users[1].dateOfBirth}}</p>
-            <p>Dirección: Calle {{users[1].address.street}}, {{users[1].address.houseAddress}} </p>
-            <p>{{users[1].address.city}}</p>
-            <div v-if="users[1].userStatus== 'ONLINE'">
+            <h4>Hola, {{selectedUser.name}}</h4>
+            <p>Fecha de nacimiento: {{selectedUser.dateOfBirth}}</p>
+            <p>Dirección: Calle {{selectedUser.address.street}}, {{selectedUser.address.houseAddress}} </p>
+            <p>{{selectedUser.address.city}}</p>
+            <div v-if="selectedUser.userStatus== 'ONLINE'">
                 <p>Status : online 🌝</p>
             </div>
             <div v-else>
@@ -23,6 +23,7 @@
         </ul> -->
         </section>
         <section class="section">
+            {{ selectedUser }}
             <p>{{users}}</p>
         </section>
         <br>
@@ -58,7 +59,7 @@
 
       data(){
         return{
-            
+            selectedUser: {}
         }
       },
       computed: {    
@@ -73,6 +74,9 @@
       },
       async created() {
         this.fetchAllUsers();
+        const response = await fetch(`http://localhost:8080/guestusers/${this.$route.params.name}`)
+        const selectedUserFetch = await response.json()
+        this.selectedUser = selectedUserFetch
       }
     }
 </script>

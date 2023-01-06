@@ -1,6 +1,6 @@
 <template>
   <div :class="colorMode">
-    <Header />
+    <Header :users="users" />
     <LandingSection />
     <section class="section">
       <ul class="house-grid">

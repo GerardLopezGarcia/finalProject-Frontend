@@ -8,15 +8,15 @@
         <span >The housing App</span>
       </div>
       <div class="profile">
-        <router-link to="/profile">
+        <router-link :to="`/profile/${user}`">
             <a href="#">Become a host</a>
         </router-link>
         <div class="color-mode" @click="changeColorMode()">
             {{colorModeIcon}}
         </div>
         <div class="user-form" v-if="showForm">
-            <input type="text" placeholder="user" class="input-user">
-            <input type="text" placeholder="password" class="input-password">
+            <input type="text" placeholder="user" class="input-user" v-model="user" v-on:keyup.enter="enterUser">
+            <input type="password" placeholder="password" class="input-password" v-model="password" v-on:keyup.enter="enterUser">
         </div>
         <div class="user" @click="displayForm()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="userIcon">
@@ -37,7 +37,14 @@ import { useStoreStore } from "../store/store";
         data(){
             return{
                 showForm: false,
+                userInput: "",
+                passwordInput: "",
+                user:"",
+                password:""
             }
+        },
+        props:{
+            users: []
         },
         methods : {
             displayForm() {
@@ -45,11 +52,28 @@ import { useStoreStore } from "../store/store";
             },
             //traigo actions de pinia
             ...mapActions(useStoreStore, ['changeColorMode']),
+            enterUser(){
+                //comprobar usuario
+                this.$router.push(`/profile/${this.user}`)
+            }
         },
         computed : {
             ...mapState(useStoreStore, ['colorModeIcon']),
+        },
+        watch: {
+            //la mala seguridad se paga caro
+
+            user(newValue){
+                this.user =newValue
+                console.log("user:",this.user);
+            },
+            password(newValue){
+                this.password =newValue
+                console.log("pass:",this.password);
+            }
         }
     }
+    // router.push({path: tripPathView(trip.id)})
 
 </script>
 

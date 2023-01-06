@@ -1,19 +1,19 @@
 <template>
 <div :class="colorMode">
-  <span>
-    <h2>About</h2>
-    <ul>
-      <li>How Housing works</li>
-      <li>Newsroom</li>
-      <li>Housing 2021</li>
-      <li>Investors</li>
-      <li>Housing Plus</li>
-      <li>Housing Luxe</li>
+  <span >
+    <h2 class="animate-footer">About</h2>
+    <ul class="animate-footer">
+      <li >How Housing works</li>
+      <li >Newsroom</li>
+      <li >Housing 2021</li>
+      <li >Investors</li>
+      <li >Housing Plus</li>
+      <li >Housing Luxe</li>
     </ul>
   </span>
-  <span>
-    <h2>Community</h2>
-    <ul>
+  <span >
+    <h2 class="animate-footer">Community</h2>
+    <ul class="animate-footer"> 
       <li>Diversity & Belonging</li>
       <li>Accessibility</li>
       <li>Housing Associates</li>
@@ -22,9 +22,9 @@
       <li>Housing.org</li>
     </ul>
   </span>
-  <span>
-    <h2>Host</h2>
-    <ul>
+  <span >
+    <h2 class="animate-footer">Host</h2>
+    <ul class="animate-footer">
       <li>Host your home</li>
       <li>Host an Online Experience</li>
       <li>Host an Experience</li>
@@ -33,9 +33,9 @@
       <li>Community Centre</li>
     </ul>
   </span>
-  <span>
-    <h2>Support</h2>
-    <ul>
+  <span >
+    <h2 class="animate-footer">Support</h2>
+    <ul class="animate-footer">
       <li>Our COVID-19 Response</li>
       <li>Help Centre</li>
       <li>Cancellation options</li>

@@ -32,6 +32,7 @@
 import { mapState,mapActions } from "pinia";
 import { useStoreStore } from "../store/store";
 
+
     export default {
         data(){
             return{

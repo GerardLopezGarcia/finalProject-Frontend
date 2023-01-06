@@ -1,7 +1,8 @@
 <template>
-    <div class="box">
+    <router-link to="/housecard" class="router-link">
+        <div class="box">
         <div class="box-image">
-            <img :src="house.imageUrl" >
+            <img :src="house.imageUrl" style="width: 100%; border-radius: .6rem; height: 13rem;">
         </div>
         <div class="box-info">
             <h6>{{ house.houseAddress }},{{ house.country }}</h6>
@@ -9,6 +10,8 @@
             <p>{{ house.score }} <img src="./icons/star.svg" alt="star" style="width: 1vw;"></p>
         </div>
     </div>
+</router-link>
+
 
 </template>
 
@@ -34,9 +37,10 @@ export default{
         background-color: var(--light);
         width: 19rem;
         margin: 2vw;
-        height: 19rem;
+        height: 88%;
         border-radius: 1vw;
         color: var(--dark);
+        text-decoration: none;
     }
     p{
         font-size: 1vw;
@@ -45,6 +49,11 @@ export default{
         font-size: 1vw;
     }
     .box-info{
-       margin: 1vw 1vw;
+       margin: 1vw 1vw ;
+       padding-bottom: 1rem;
     }
+    .router-link{
+        text-decoration: none;
+    }
+
 </style>

@@ -3,6 +3,10 @@
         <div class="img-header-profile">
         <Header/>
         </div>
+        <section class="section selected-house">
+            <img :src="houses[position].imageUrl" style="height: 33rem;">
+            <p>{{ houses[position] }}</p>
+        </section>
         <section class="section">
         <ul class="house-grid">
             <li v-for="(house, index) in houses" :key="index">
@@ -38,13 +42,16 @@
 
       data(){
         return{
-            
+
         }
       },
       computed: {    
       // gives read access to this.countries and this.anotherVar
       ...mapState(useStoreStore, ['colorMode','houses']),
-      ...mapState(useUsersStore, ['users'])
+      ...mapState(useUsersStore, ['users']),
+        position(){
+            return this.$route.params.id
+        }
       },
       methods: {    
       // gives access to this.fetchAll()
@@ -65,6 +72,9 @@
         background: url("../components/icons/forest.jpg");
         background-size: cover;
         background-position: 0% 35%;
+    }
+    .selected-house{
+        display: flex;
     }
     .section {
   /* margin-top: 4vw;

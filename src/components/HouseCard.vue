@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/housecard" class="router-link">
+    <router-link :to="`/housecard/${house.id-1}`" class="router-link">
         <div class="box">
         <div class="box-image">
             <img :src="house.imageUrl" style="width: 100%; border-radius: .6rem; height: 13rem;">

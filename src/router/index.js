@@ -15,7 +15,7 @@ const routes = [
         component:Profile
     },
     {
-        path:'/housecard',
+        path:'/housecard/:id',
         name:'housecard',
         component:CardInfo
     }

@@ -10,10 +10,10 @@
             <p>Dirección: Calle {{selectedUser.address.street}}, {{selectedUser.address.houseAddress}} </p>
             <p>{{selectedUser.address.city}}</p>
             <div v-if="selectedUser.userStatus== 'ONLINE'">
-                <p>Status : online 🌝</p>
+                <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;" ></p>
             </div>
             <div v-else>
-                <p>Status : offline 😴</p>
+                <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;" ></p>
             </div>
             
         <!-- <ul>
@@ -21,9 +21,12 @@
                 {{user.name}}
             </li>
         </ul> -->
+        <h3>{{ logedUser }}</h3>
         </section>
+        <MidBanner/>
+        <!-- <p>{{ houses[0]}}</p> -->
         <section class="section">
-            {{ selectedUser }}
+            <!-- {{ selectedUser }} -->
             <p>{{users}}</p>
         </section>
         <br>
@@ -65,7 +68,7 @@
       computed: {    
       // gives read access to this.countries and this.anotherVar
       ...mapState(useStoreStore, ['colorMode','houses']),
-      ...mapState(useUsersStore, ['users'])
+      ...mapState(useUsersStore, ['users','logedUser'])
       },
       methods: {    
       // gives access to this.fetchAll()
@@ -73,6 +76,7 @@
       ...mapActions(useStoreStore, ['fetchAll'])
       },
       async created() {
+        this.fetchAll();
         this.fetchAllUsers();
         const response = await fetch(`http://localhost:8080/guestusers/${this.$route.params.name}`)
         const selectedUserFetch = await response.json()

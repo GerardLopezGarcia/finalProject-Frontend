@@ -8,18 +8,21 @@
         <span >The housing App</span>
       </div>
       <div class="profile">
-        <router-link :to="`/profile/${user}`">
+        <router-link :to="`/profile/estudiante indeciso`">
             <a href="#">Become a host</a>
         </router-link>
         <div class="color-mode" @click="changeColorMode()">
             {{colorModeIcon}}
         </div>
         <div class="user-form" v-if="showForm">
-            <input type="text" placeholder="user" class="input-user" v-model="user" v-on:keyup.enter="enterUser">
-            <input type="password" placeholder="password" class="input-password" v-model="password" v-on:keyup.enter="enterUser">
+            <input type="text" placeholder="user" class="input-user" v-model="user" v-on:keyup.enter="enterUser(user,password,this.$router)">
+            <input type="password" placeholder="password" class="input-password" v-model="password" v-on:keyup.enter="enterUser(user,password,this.$router)">
+            <img src="./icons/login.svg" class="login-logo">
+            <p v-if="message" class="error-message">❌</p>
+
         </div>
         <div class="user" @click="displayForm()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="userIcon">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="userIcon">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
             </svg>
         </div>
@@ -31,6 +34,7 @@
 <script>
 import { mapState,mapActions } from "pinia";
 import { useStoreStore } from "../store/store";
+import { useUsersStore } from "../store/users";
 
 
     export default {
@@ -44,7 +48,9 @@ import { useStoreStore } from "../store/store";
             }
         },
         props:{
-            users: []
+            users: {
+                type: Array
+            }
         },
         methods : {
             displayForm() {
@@ -52,24 +58,21 @@ import { useStoreStore } from "../store/store";
             },
             //traigo actions de pinia
             ...mapActions(useStoreStore, ['changeColorMode']),
-            enterUser(){
-                //comprobar usuario
-                this.$router.push(`/profile/${this.user}`)
-            }
+            ...mapActions(useUsersStore, ['enterUser'])
         },
         computed : {
             ...mapState(useStoreStore, ['colorModeIcon']),
+            ...mapState(useUsersStore, ['logedUser','message'])
         },
         watch: {
             //la mala seguridad se paga caro
 
             user(newValue){
                 this.user =newValue
-                console.log("user:",this.user);
+                
             },
             password(newValue){
                 this.password =newValue
-                console.log("pass:",this.password);
             }
         }
     }
@@ -102,27 +105,27 @@ import { useStoreStore } from "../store/store";
     }
     .input-user {
         padding: 0.2rem;
-        font-size: 1ren;
+        font-size: .83rem;
         border-width: 1px;
-        border-color: #CCCCCC;
+        /* border-color: #CCCCCC; */
         background-color: #FFFFFF;
         color: var(--dark);
         border-style: solid;
         border-radius: 9px;
-        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411);
+        /* box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411); */
         width: 44%;
      
     }
     .input-password {
         padding: 0.2rem;
-        font-size: 1ren;
+        font-size: .83rem;
         border-width: 1px;
-        border-color: #CCCCCC;
+        /* border-color: #CCCCCC; */
         background-color: #FFFFFF;
         color: var(--dark);
         border-style: solid;
         border-radius: 9px;
-        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411);
+        /* box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.411); */
         width: 44%;
     }
 
@@ -158,11 +161,22 @@ import { useStoreStore } from "../store/store";
         display: flex;
         align-items: center;
     }
+    .userIcon{
+        width: 1.5rem;
+    }
+    .login-logo{
+        width: 1.5rem;
+    }
     .user {
         cursor: pointer;
+        display: flex;
     }
     .color-mode{
         cursor: pointer;
         font-size: 1.3rem;
+    }
+    .error-message{
+        color: red;
+        padding-left: 1rem;
     }
 </style>

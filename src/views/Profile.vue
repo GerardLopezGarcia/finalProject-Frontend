@@ -5,40 +5,43 @@
         </div>
         <div class="container">
             <div class="userdata-column">
-                    <h2> Detalles de la cuenta </h2>
-                    <h4>Hola, {{ selectedUser.name }}</h4>
-                    <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
-                    <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
-                    <p>{{ selectedUser.address.city }}</p>
-                    <div v-if="selectedUser.userStatus == 'ONLINE'">
-                        <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;"></p>
-                    </div>
-                    <div v-else>
-                        <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
-                    </div>
-
-                    <!-- <ul>
-            <li v-for="(user,index) in users" :key="index" >
-                {{user.name}}
-            </li>
-        </ul> -->
-                    <h3>{{ logedUser }}</h3>
+                <h2> Detalles de la cuenta </h2>
+                <h4>Hola, {{ selectedUser.name }}</h4> 
+                <br>
+                <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
+                <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
+                <p>{{ selectedUser.address.city }}</p>
+                <div v-if="selectedUser.userStatus == 'ONLINE'">
+                    <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;"></p>
+                </div>
+                <div v-else>
+                    <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
+                </div>
+                <br>
+                <h3>{{ logedUser }}</h3>
+                
             </div>
-            <div>
-                <section class="section">
-                    <ul class="house-grid">
-                        <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
-                            <HouseCard :house="houses[index]" />
-                        </li>
-                    </ul>
-                </section>
+            <div class="bookings-column">
+                <div class="bookings">
+                    <h2> Gestiona tus reservas </h2>
+                    <p>Consulta las casas disponibles</p>
+                    <br>
+                </div>
+                <div class="bookings">
+                    <p>{{ users }}</p>
+                </div>
+                <ul class="house-grid">
+                    <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
+                        <HouseCard :house="houses[index]" />
+                    </li>
+                </ul>
             </div>
         </div>
         <LastBanner :kiss="kiss" :unfocus="unfocus" />
         <section class="section">
             <!-- {{ selectedUser }} -->
             <!-- <p>{{ houses[0]}}</p> -->
-            <p>{{ users }}</p>
+
         </section>
         <br>
         <Footer />
@@ -138,5 +141,19 @@ header {
     width: 100%;
     border-right: 1px solid #0002;
     margin: 1rem;
+}
+.bookings-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 2rem;
+    width: 100%;
+}
+.bookings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-bottom: 1px solid #0002;
+    width: 55rem;
 }
 </style>

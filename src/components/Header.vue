@@ -17,8 +17,8 @@
         <div class="user-form" v-if="showForm">
             <input type="text" placeholder="user" class="input-user" v-model="user" v-on:keyup.enter="enterUser(user,password,this.$router)">
             <input type="password" placeholder="password" class="input-password" v-model="password" v-on:keyup.enter="enterUser(user,password,this.$router)">
-            <img src="./icons/login.svg" class="login-logo">
-            <p v-if="message" class="error-message">❌</p>
+            <img src="./icons/login.svg" class="login-logo" @click="enterUser(user,password,this.$router)">
+            <p v-if="message" class="error-message" >❌</p>
 
         </div>
         <div class="user" @click="displayForm()">
@@ -166,6 +166,7 @@ import { useUsersStore } from "../store/users";
     }
     .login-logo{
         width: 1.5rem;
+        cursor: pointer;
     }
     .user {
         cursor: pointer;

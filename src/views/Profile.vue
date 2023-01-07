@@ -1,36 +1,47 @@
 <template>
     <div :class="colorMode">
         <div class="img-header-profile">
-        <Header/>
+            <Header />
         </div>
-        <section class="section">
-            <h2> Detalles de la cuenta </h2>
-            <h4>Hola, {{selectedUser.name}}</h4>
-            <p>Fecha de nacimiento: {{selectedUser.dateOfBirth}}</p>
-            <p>Dirección: Calle {{selectedUser.address.street}}, {{selectedUser.address.houseAddress}} </p>
-            <p>{{selectedUser.address.city}}</p>
-            <div v-if="selectedUser.userStatus== 'ONLINE'">
-                <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;" ></p>
-            </div>
-            <div v-else>
-                <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;" ></p>
-            </div>
-            
-        <!-- <ul>
+        <div class="container">
+            <div class="userdata-column">
+                    <h2> Detalles de la cuenta </h2>
+                    <h4>Hola, {{ selectedUser.name }}</h4>
+                    <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
+                    <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
+                    <p>{{ selectedUser.address.city }}</p>
+                    <div v-if="selectedUser.userStatus == 'ONLINE'">
+                        <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;"></p>
+                    </div>
+                    <div v-else>
+                        <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
+                    </div>
+
+                    <!-- <ul>
             <li v-for="(user,index) in users" :key="index" >
                 {{user.name}}
             </li>
         </ul> -->
-        <h3>{{ logedUser }}</h3>
-        </section>
-        <MidBanner/>
-        <!-- <p>{{ houses[0]}}</p> -->
+                    <h3>{{ logedUser }}</h3>
+            </div>
+            <div>
+                <section class="section">
+                    <ul class="house-grid">
+                        <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
+                            <HouseCard :house="houses[index]" />
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <LastBanner :kiss="kiss" :unfocus="unfocus" />
         <section class="section">
             <!-- {{ selectedUser }} -->
-            <p>{{users}}</p>
+            <!-- <p>{{ houses[0]}}</p> -->
+            <p>{{ users }}</p>
         </section>
         <br>
-        <Footer/>
+        <Footer />
     </div>
 
 
@@ -39,60 +50,93 @@
 </template>
 
 <script>
-  import Header from "../components/Header.vue"
-  import LandingSection from "../components/LandingSection.vue"
-  import HouseCard from "../components/HouseCard.vue"
-  import MidBanner from "../components/MidBanner.vue"
-  import LiveAnywhere from "../components/LiveAnywhere.vue"
-  import LastBanner from "../components/LastBanner.vue"
-  import Footer from "../components/Footer.vue"
-  import { mapState, mapActions } from "pinia";
-  import { useStoreStore } from "../store/store";
-  import { useUsersStore } from "../store/users";
+import Header from "../components/Header.vue"
+import LandingSection from "../components/LandingSection.vue"
+import HouseCard from "../components/HouseCard.vue"
+import MidBanner from "../components/MidBanner.vue"
+import LiveAnywhere from "../components/LiveAnywhere.vue"
+import LastBanner from "../components/LastBanner.vue"
+import Footer from "../components/Footer.vue"
+import { mapState, mapActions } from "pinia";
+import { useStoreStore } from "../store/store";
+import { useUsersStore } from "../store/users";
+//animations
+import { gsap } from "gsap"
+import { CSSPlugin } from 'gsap/CSSPlugin'
+gsap.registerPlugin(CSSPlugin);
 
 
 
-    export default {
-      components: {
+
+export default {
+    components: {
         Header,
         HouseCard,
         MidBanner,
+        LastBanner,
         Footer
-      },
+    },
 
-      data(){
-        return{
+    data() {
+        return {
             selectedUser: {}
         }
-      },
-      computed: {    
-      // gives read access to this.countries and this.anotherVar
-      ...mapState(useStoreStore, ['colorMode','houses']),
-      ...mapState(useUsersStore, ['users','logedUser'])
-      },
-      methods: {    
-      // gives access to this.fetchAll()
-      ...mapActions(useUsersStore, ['fetchAllUsers']),
-      ...mapActions(useStoreStore, ['fetchAll'])
-      },
-      async created() {
+    },
+    computed: {
+        // gives read access to this.countries and this.anotherVar
+        ...mapState(useStoreStore, ['colorMode', 'houses']),
+        ...mapState(useUsersStore, ['users', 'logedUser'])
+    },
+    methods: {
+        // gives access to this.fetchAll()
+        ...mapActions(useUsersStore, ['fetchAllUsers']),
+        ...mapActions(useStoreStore, ['fetchAll']),
+        focus(event) {
+            gsap.to(event.target, { duration: .4, scale: 1.1 })
+        },
+        unfocus(event) {
+            gsap.to(event.target, { duration: .4, scale: 1 })
+        },
+        kiss(event) {
+            gsap.from(event.target, { duration: .7, scaleY: 0.4 })
+            console.log("kissin");
+        }
+    },
+    async created() {
         this.fetchAll();
         this.fetchAllUsers();
         const response = await fetch(`http://localhost:8080/guestusers/${this.$route.params.name}`)
         const selectedUserFetch = await response.json()
         this.selectedUser = selectedUserFetch
-      }
     }
+}
 </script>
 
 <style scoped>
-    header{
-        position: relative;
-    }
-    .img-header-profile {
-        background: url("../components/icons/forest.jpg");
-        background-size: cover;
-        background-position: 0% 35%;
-    }
+header {
+    position: relative;
+}
 
+.container {
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+}
+
+.img-header-profile {
+    background: url("../components/icons/forest.jpg");
+    background-size: cover;
+    background-position: 0% 35%;
+}
+
+.userdata-column {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    width: 100%;
+    border-right: 1px solid #0002;
+    margin: 1rem;
+}
 </style>

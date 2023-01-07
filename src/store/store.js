@@ -16,7 +16,7 @@ export const useStoreStore = defineStore('store', {
     changeColorMode() {
       this.colorMode = (this.colorMode == "dark")? "light" : "dark"
       this.colorModeIcon = (this.colorModeIcon == "🌚")? "🌝" : "🌚"
-      console.log(this.colorMode)
+      console.log(this.colorModeIcon)
       if(this.colorMode == "dark"){
         document.querySelector("html").style.background = "#1e1e38"
       }else{

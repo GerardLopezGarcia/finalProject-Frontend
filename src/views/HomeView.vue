@@ -2,16 +2,19 @@
   <div :class="colorMode">
     <Header :users="users" />
     <LandingSection />
-    <section class="section">
-      <ul class="house-grid">
-        <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
-          <HouseCard :house="houses[index]" />
-        </li>
-      </ul>
-    </section>
-    <MidBanner :kiss="kiss" :unfocus="unfocus" />
-    <LiveAnywhere :focus="focus" :unfocus="unfocus" />
-    <LastBanner :kiss="kiss" :unfocus="unfocus" />
+    <div class="media-width">
+      <section class="section">
+        <ul class="house-grid">
+          <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
+            <HouseCard :house="houses[index]" />
+          </li>
+        </ul>
+      </section>
+      <MidBanner :kiss="kiss" :unfocus="unfocus" />
+      <LiveAnywhere :focus="focus" :unfocus="unfocus" />
+      <LastBanner :kiss="kiss" :unfocus="unfocus" />
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -72,11 +75,6 @@ export default {
       gsap.from(event.target, { duration: .7, scaleY: 0.4 })
       console.log("kissin");
     }
-  },
-  async created() {
-    document.querySelector("html").style.background = "#1e1e38"
-
-
   },
   async mounted() {
     //llamada al backend
@@ -206,5 +204,12 @@ p {
 
 ul {
   list-style: none;
+}
+
+@media (min-width: 1500px) { 
+  .media-width{
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
 </style>

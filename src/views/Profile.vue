@@ -3,6 +3,7 @@
         <div class="img-header-profile">
             <Header />
         </div>
+        <div class="media-width">
         <div class="container">
             <div class="userdata-column">
                 <h2> Detalles de la cuenta </h2>
@@ -22,17 +23,41 @@
                 
             </div>
             <div class="bookings-column">
-                <div class="bookings">
+                <div class="booking-title">
                     <h2> Gestiona tus reservas </h2>
                     <p>Consulta las casas disponibles</p>
                     <br>
                 </div>
                 <div class="bookings">
-                    <p>{{ users }}</p>
+                    <div class="booked-house">
+                        <p>{{ houses[0].guestUser }} </p>
+                        <a class="cancel-booking" @click="unAssignHouse(1)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+                    <div class="booked-house">
+                        <p>{{ houses[1].guestUser }}</p>
+                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+                    <div class="booked-house">
+                        <p>{{ houses[2].guestUser }}</p>
+                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+                    <div class="booked-house">
+                        <p>{{ houses[3].guestUser }}</p>
+                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+                    <div class="booked-house">
+                        <p>{{ houses[4].guestUser }}</p>
+                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+                    <div class="booked-house">
+                        <p>{{ houses[5].guestUser }}</p>
+                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    </div>
+
                 </div>
                 <ul class="house-grid">
                     <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
-                        <HouseCard :house="houses[index]" />
+                        <SimplifiedHouseCard :house="houses[index]"  :userName="selectedUser.name"/>
                     </li>
                 </ul>
             </div>
@@ -44,6 +69,7 @@
 
         </section>
         <br>
+        </div>
         <Footer />
     </div>
 
@@ -54,12 +80,10 @@
 
 <script>
 import Header from "../components/Header.vue"
-import LandingSection from "../components/LandingSection.vue"
-import HouseCard from "../components/HouseCard.vue"
 import MidBanner from "../components/MidBanner.vue"
-import LiveAnywhere from "../components/LiveAnywhere.vue"
 import LastBanner from "../components/LastBanner.vue"
 import Footer from "../components/Footer.vue"
+import SimplifiedHouseCard from "../components/SimplifiedHouseCard.vue"
 import { mapState, mapActions } from "pinia";
 import { useStoreStore } from "../store/store";
 import { useUsersStore } from "../store/users";
@@ -74,7 +98,7 @@ gsap.registerPlugin(CSSPlugin);
 export default {
     components: {
         Header,
-        HouseCard,
+        SimplifiedHouseCard,
         MidBanner,
         LastBanner,
         Footer
@@ -93,7 +117,7 @@ export default {
     methods: {
         // gives access to this.fetchAll()
         ...mapActions(useUsersStore, ['fetchAllUsers']),
-        ...mapActions(useStoreStore, ['fetchAll']),
+        ...mapActions(useStoreStore, ['fetchAll','unAssignHouse']),
         focus(event) {
             gsap.to(event.target, { duration: .4, scale: 1.1 })
         },
@@ -149,11 +173,33 @@ header {
     padding: 2rem;
     width: 100%;
 }
-.bookings {
+.booking-title{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     border-bottom: 1px solid #0002;
     width: 55rem;
 }
+.bookings{
+    border-bottom: 1px solid #0002;
+    width: 55rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+.booked-house {
+    display: flex;
+    flex-direction: row;
+}
+.cancel-booking:active{
+	position:relative;
+	top:.3rem;
+}
+
+@media (min-width: 1550px) { 
+  .media-width{
+    padding-left: 11rem;
+    padding-right: 11rem;
+  }
+}
+
 </style>

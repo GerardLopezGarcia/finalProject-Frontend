@@ -4,6 +4,7 @@
         <div class="img-header-profile">
             <Header />
         </div>
+        <div class="media-width">
         <section class="section selected-house">
             <a :href="houses[position].imageUrl" target="_blank" id="anchor-img">
                 <img :src="houses[position].imageUrl" class="house-img" @mouseenter="enlight" @mouseleave="dimm">
@@ -48,6 +49,7 @@
             </ul>
         </section>
         <br>
+        </div>
         <Footer />
     </div>
 
@@ -214,5 +216,11 @@ p {
         ". ."
         ". .";
     border-radius: .4rem;
+}
+@media (min-width: 1550px) { 
+  .media-width{
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
 </style>

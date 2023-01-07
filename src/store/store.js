@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 export const useStoreStore = defineStore('store', {
   state: () => ({
     houses: [],
-    colorMode: "dark",
-    colorModeIcon: "🌚"
+    colorMode: "light",
+    colorModeIcon: "🌝"
   }),
   actions: {
     async fetchAll() {
@@ -12,6 +12,18 @@ export const useStoreStore = defineStore('store', {
       const data = await response.json()
       this.houses = await data
       console.log(this.houses);
+    },
+    async assignHouse(id,name){
+      await fetch(`http://localhost:8080/houses/${id}/${name}`,{
+        method:'PATCH'
+      })
+      console.log(id,name);
+    },
+    async unAssignHouse(id){
+      await fetch(`http://localhost:8080/houseunassignguest/${id}`,{
+        method:'PATCH'
+      })
+      console.log("booking removed");
     },
     changeColorMode() {
       this.colorMode = (this.colorMode == "dark")? "light" : "dark"

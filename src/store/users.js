@@ -11,8 +11,6 @@ export const useUsersStore = defineStore('users', {
       const response = await fetch('http://localhost:8080/users')
       const usersFetch = await response.json()
       this.users = usersFetch
-
-
     },
     enterUser(user,password,router){
       //comprobar usuario
@@ -29,6 +27,11 @@ export const useUsersStore = defineStore('users', {
             console.log("mensaje de pinia",user)
             console.log("mensaje de pinia pass",password)
             router.push(`/profile/${user}`)
+          }else{
+            this.message = true
+            setTimeout(() => {
+              this.message = false
+            }, "2000")
           }
 
         }else if(i == 4 && user.toLowerCase() != arrayNames[i]){

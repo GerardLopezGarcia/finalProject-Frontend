@@ -19,7 +19,6 @@
                         <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
                     </div>
                     <br>
-                    <h3>{{ logedUser }}</h3>
 
                 </div>
                 <div class="bookings-column">
@@ -32,7 +31,7 @@
                         <div class="booked-house" v-for="(el, index) in users[selectedUserId].houses" :key="index">
                             <img :src="el.imageUrl" style="width: 4.5rem;border-radius: .4rem;">
                             <p> Booked house in : {{ el.houseAddress }},{{ el.country }} </p>
-                            <p> {{ el.score }}<img src="../components/icons/star.svg" alt="star" style="width: 1vw;">
+                            <p> {{ el.score }} <img src="../components/icons/star.svg" alt="star" style="width: 1vw;padding-left: .1rem;">
                             </p>
                             <div class="details-grid">
                                 <p class="house-icon">🏡 {{ el.houseDetails.bedrooms }} </p>
@@ -52,13 +51,6 @@
                 </div>
             </div>
             <LastBanner :kiss="kiss" :unfocus="unfocus" />
-            <section class="section">
-                <!-- {{ users }} -->
-
-                <!-- {{ selectedUser }} -->
-                <!-- <p>{{ houses[0]}}</p> -->
-
-            </section>
             <br>
         </div>
         <Footer />

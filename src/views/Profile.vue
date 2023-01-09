@@ -30,27 +30,23 @@
                 </div>
                 <div class="bookings">
                     <div class="booked-house">
-                        <p>Booked by: {{ houses[0].guestUser.name }} </p>
+                        <p>Booked by: {{ users[0].houses}} </p>
                         <a class="cancel-booking" @click="unAssignHouse(1)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>Booked by: {{ houses[1].guestUser }}</p>
+                        <p>Booked by: {{ users[1].houses }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>Booked by: {{ houses[2].guestUser }}</p>
+                        <p>Booked by: {{ users[2].houses }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>Booked by: {{ houses[3].guestUser}}</p>
+                        <p>Booked by: {{ users[3].houses}}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>Booked by: {{ houses[4].guestUser }}</p>
-                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
-                    </div>
-                    <div class="booked-house">
-                        <p>Booked by: {{ houses[5].guestUser.name }}</p>
+                        <p>Booked by: {{ users[4].houses }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
 
@@ -64,6 +60,8 @@
         </div>
         <LastBanner :kiss="kiss" :unfocus="unfocus" />
         <section class="section">
+            {{ users }}
+            
             <!-- {{ selectedUser }} -->
             <!-- <p>{{ houses[0]}}</p> -->
 

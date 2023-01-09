@@ -18,12 +18,14 @@ export const useStoreStore = defineStore('store', {
         method:'PATCH'
       })
       console.log(id,name);
+      // this.$router.go()
     },
     async unAssignHouse(id){
       await fetch(`http://localhost:8080/houseunassignguest/${id}`,{
         method:'PATCH'
       })
       console.log("booking removed");
+      // this.$router.go()
     },
     changeColorMode() {
       this.colorMode = (this.colorMode == "dark")? "light" : "dark"

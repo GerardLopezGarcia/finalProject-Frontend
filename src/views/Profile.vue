@@ -7,7 +7,7 @@
         <div class="container">
             <div class="userdata-column">
                 <h2> Detalles de la cuenta </h2>
-                <h4>Hola, {{ selectedUser.name }}</h4> 
+                <h4>Hola, {{ selectedUser.name }} </h4> 
                 <br>
                 <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
                 <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
@@ -29,27 +29,10 @@
                     <br>
                 </div>
                 <div class="bookings">
-                    <div class="booked-house">
-                        <p>Booked by: {{ users[0].houses}} </p>
-                        <a class="cancel-booking" @click="unAssignHouse(1)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    <div class="booked-house" v-for="(el,index) in users[userId].houses">
+                        <p>Booked house: {{el}} </p>
+                        <a class="cancel-booking" @click="unAssignHouse(el.id,this.$router)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
-                    <div class="booked-house">
-                        <p>Booked by: {{ users[1].houses }}</p>
-                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
-                    </div>
-                    <div class="booked-house">
-                        <p>Booked by: {{ users[2].houses }}</p>
-                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
-                    </div>
-                    <div class="booked-house">
-                        <p>Booked by: {{ users[3].houses}}</p>
-                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
-                    </div>
-                    <div class="booked-house">
-                        <p>Booked by: {{ users[4].houses }}</p>
-                        <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
-                    </div>
-
                 </div>
                 <ul class="house-grid">
                     <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
@@ -110,7 +93,7 @@ export default {
     computed: {
         // gives read access to this.countries and this.anotherVar
         ...mapState(useStoreStore, ['colorMode', 'houses']),
-        ...mapState(useUsersStore, ['users', 'logedUser'])
+        ...mapState(useUsersStore, ['users', 'logedUser','userId'])
     },
     methods: {
         // gives access to this.fetchAll()
@@ -133,6 +116,9 @@ export default {
         const response = await fetch(`http://localhost:8080/guestusers/${this.$route.params.name}`)
         const selectedUserFetch = await response.json()
         this.selectedUser = selectedUserFetch
+        //user id 
+        const arrayNames =["mujerilusionada","estudianteindeciso","reciencasados","padresconhijos","grupodeamigos"]
+        const arrayId=[2,0,4,3,1]
     }
 }
 </script>

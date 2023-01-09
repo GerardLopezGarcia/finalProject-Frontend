@@ -4,6 +4,7 @@ export const useUsersStore = defineStore('users', {
   state: () => ({
     users: [],
     logedUser: {},
+    userId: 0,
     message:false
   }),
   actions: {
@@ -15,8 +16,9 @@ export const useUsersStore = defineStore('users', {
     enterUser(user,password,router){
       //comprobar usuario
       console.log(user)
-      const arrayNames =["mujer ilusionada","estudiante indeciso","recien casados","padres con hijos","grupo de amigos"]
+      const arrayNames =["mujerilusionada","estudianteindeciso","reciencasados","padresconhijos","grupodeamigos"]
       const arrayPass= ["ironhack1","ironhack4","ironhack","ironhack2","ironhack3"]
+      const arrayId=[2,0,4,3,1]
       for (let i = 0; i < arrayNames.length; i++) {
         if(user.toLowerCase() == arrayNames[i]){
           //usuario encontrado -  compruebo contraseña
@@ -24,6 +26,7 @@ export const useUsersStore = defineStore('users', {
             this.message=false
             this.logedUser.user = user
             this.logedUser.password = password
+            this.userId=arrayId[i]
             console.log("mensaje de pinia",user)
             console.log("mensaje de pinia pass",password)
             router.push(`/profile/${user}`)

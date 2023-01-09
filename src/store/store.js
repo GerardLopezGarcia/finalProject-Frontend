@@ -13,19 +13,19 @@ export const useStoreStore = defineStore('store', {
       this.houses = await data
       console.log(this.houses);
     },
-    async assignHouse(id,name){
+    async assignHouse(id,name,router){
       await fetch(`http://localhost:8080/houses/${id}/${name}`,{
         method:'PATCH'
       })
       console.log(id,name);
-      // this.$router.go()
+      router.go()
     },
-    async unAssignHouse(id){
+    async unAssignHouse(id,router){
       await fetch(`http://localhost:8080/houseunassignguest/${id}`,{
         method:'PATCH'
       })
       console.log("booking removed");
-      // this.$router.go()
+      router.go()
     },
     changeColorMode() {
       this.colorMode = (this.colorMode == "dark")? "light" : "dark"

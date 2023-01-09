@@ -13,7 +13,7 @@
                     <p>{{ house.score }} <img src="./icons/star.svg" alt="star" style="width: 1vw;"></p>
                 </div>
                 <div v-if="house.status == 'AVALIABLE'">
-                    <a class="myButton" @click="assignHouse(house.id,userName)">book it!</a>
+                    <a class="myButton" @click="assignHouse(house.id,userName,this.$router)">book it!</a>
                 </div>
                 <div v-if="house.status == 'UNAVALIABLE'">
                     <a class="myButton-unavaliable" >booked</a>

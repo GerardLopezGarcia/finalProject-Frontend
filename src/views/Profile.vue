@@ -4,52 +4,62 @@
             <Header />
         </div>
         <div class="media-width">
-        <div class="container">
-            <div class="userdata-column">
-                <h2> Detalles de la cuenta </h2>
-                <h4>Hola, {{ selectedUser.name }} </h4> 
-                <br>
-                <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
-                <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
-                <p>{{ selectedUser.address.city }}</p>
-                <div v-if="selectedUser.userStatus == 'ONLINE'">
-                    <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;"></p>
-                </div>
-                <div v-else>
-                    <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
-                </div>
-                <br>
-                <h3>{{ logedUser }}</h3>
-                
-            </div>
-            <div class="bookings-column">
-                <div class="booking-title">
-                    <h2> Gestiona tus reservas </h2>
-                    <p>Consulta las casas disponibles</p>
+            <div class="container">
+                <div class="userdata-column">
+                    <h2> Detalles de la cuenta </h2>
+                    <h4>Hola, {{ selectedUser.name }} </h4>
                     <br>
-                </div>
-                <div class="bookings">
-                    <div class="booked-house" v-for="(el,index) in users[userId].houses">
-                        <p>Booked house: {{el}} </p>
-                        <a class="cancel-booking" @click="unAssignHouse(el.id,this.$router)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                    <p>Fecha de nacimiento: {{ selectedUser.dateOfBirth }}</p>
+                    <p>Dirección: Calle {{ selectedUser.address.street }}, {{ selectedUser.address.houseAddress }} </p>
+                    <p>{{ selectedUser.address.city }}</p>
+                    <div v-if="selectedUser.userStatus == 'ONLINE'">
+                        <p>Status : online <img src="../components/icons/online.svg" style="width: 1rem;"></p>
                     </div>
-                </div>
-                <ul class="house-grid">
-                    <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
-                        <SimplifiedHouseCard :house="houses[index]"  :userName="selectedUser.name"/>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <LastBanner :kiss="kiss" :unfocus="unfocus" />
-        <section class="section">
-            {{ users }}
-            
-            <!-- {{ selectedUser }} -->
-            <!-- <p>{{ houses[0]}}</p> -->
+                    <div v-else>
+                        <p>Status : offline <img src="../components/icons/offline.svg" style="width: 1rem;"></p>
+                    </div>
+                    <br>
+                    <h3>{{ logedUser }}</h3>
 
-        </section>
-        <br>
+                </div>
+                <div class="bookings-column">
+                    <div class="booking-title">
+                        <h2> Gestiona tus reservas </h2>
+                        <p>Consulta las casas disponibles</p>
+                        <br>
+                    </div>
+                    <div class="bookings">
+                        <div class="booked-house" v-for="(el, index) in users[selectedUserId].houses" :key="index">
+                            <img :src="el.imageUrl" style="width: 4.5rem;border-radius: .4rem;">
+                            <p> Booked house in : {{ el.houseAddress }},{{ el.country }} </p>
+                            <p> {{ el.score }}<img src="../components/icons/star.svg" alt="star" style="width: 1vw;">
+                            </p>
+                            <div class="details-grid">
+                                <p class="house-icon">🏡 {{ el.houseDetails.bedrooms }} </p>
+                                <p class="house-icon">🛌 {{ el.houseDetails.beds }}</p>
+                                <p class="house-icon">🛀 {{ el.houseDetails.bathrooms }} </p>
+                                <p class="house-icon">🙍‍♂️ {{ el.houseDetails.guests }}</p>
+                            </div>
+                            <a class="cancel-booking" @click="unAssignHouse(el.id, this.$router)"><img
+                                    src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
+                        </div>
+                    </div>
+                    <ul class="house-grid">
+                        <li v-for="(house, index) in houses" :key="index" @mouseenter="focus" @mouseleave="unfocus">
+                            <SimplifiedHouseCard :house="houses[index]" :userName="selectedUser.name" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <LastBanner :kiss="kiss" :unfocus="unfocus" />
+            <section class="section">
+                <!-- {{ users }} -->
+
+                <!-- {{ selectedUser }} -->
+                <!-- <p>{{ houses[0]}}</p> -->
+
+            </section>
+            <br>
         </div>
         <Footer />
     </div>
@@ -87,18 +97,19 @@ export default {
 
     data() {
         return {
-            selectedUser: {}
+            selectedUser: {},
+            selectedUserId: ""
         }
     },
     computed: {
         // gives read access to this.countries and this.anotherVar
         ...mapState(useStoreStore, ['colorMode', 'houses']),
-        ...mapState(useUsersStore, ['users', 'logedUser','userId'])
+        ...mapState(useUsersStore, ['users', 'logedUser'])
     },
     methods: {
         // gives access to this.fetchAll()
         ...mapActions(useUsersStore, ['fetchAllUsers']),
-        ...mapActions(useStoreStore, ['fetchAll','unAssignHouse']),
+        ...mapActions(useStoreStore, ['fetchAll', 'unAssignHouse']),
         focus(event) {
             gsap.to(event.target, { duration: .4, scale: 1.1 })
         },
@@ -116,9 +127,14 @@ export default {
         const response = await fetch(`http://localhost:8080/guestusers/${this.$route.params.name}`)
         const selectedUserFetch = await response.json()
         this.selectedUser = selectedUserFetch
-        //user id 
-        const arrayNames =["mujerilusionada","estudianteindeciso","reciencasados","padresconhijos","grupodeamigos"]
-        const arrayId=[2,0,4,3,1]
+        //user id para el refresh
+        const arrayNames = ["mujerilusionada", "estudianteindeciso", "reciencasados", "padresconhijos", "grupodeamigos"]
+        const arrayId = [2, 0, 4, 3, 1]
+        for (let i = 0; i < arrayNames.length; i++) {
+            if (this.selectedUser.name == arrayNames[i]) {
+                this.selectedUserId = arrayId[i]
+            }
+        }
     }
 }
 </script>
@@ -150,6 +166,7 @@ header {
     border-right: 1px solid #0002;
     margin: 1rem;
 }
+
 .bookings-column {
     display: flex;
     flex-direction: column;
@@ -157,33 +174,50 @@ header {
     padding: 2rem;
     width: 100%;
 }
-.booking-title{
+
+.booking-title {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     border-bottom: 1px solid #0002;
     width: 55rem;
 }
-.bookings{
+
+.bookings {
     border-bottom: 1px solid #0002;
     width: 55rem;
     margin-top: 2rem;
     padding-bottom: 2rem;
 }
+
 .booked-house {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
 }
-.cancel-booking:active{
-	position:relative;
-	top:.3rem;
+.details-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    -webkit-filter: grayscale(1) invert(1);
+    filter: brightness(0) saturate(100%) invert(46%)  saturate(1203%) opacity(60%);
+}
+.house-icon{
+    padding-left: 1rem;
 }
 
-@media (min-width: 1550px) { 
-  .media-width{
-    padding-left: 11rem;
-    padding-right: 11rem;
-  }
+.cancel-booking:active {
+    position: relative;
+    top: .3rem;
 }
 
+@media (min-width: 1550px) {
+    .media-width {
+        padding-left: 11rem;
+        padding-right: 11rem;
+    }
+}
 </style>

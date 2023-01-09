@@ -192,15 +192,6 @@ p {
     justify-content: space-between;
     margin-bottom: .5rem;
     margin-top: .5rem;
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        ". ."
-        ". .";
-    justify-items: center; */
     -webkit-filter: grayscale(1) invert(1);
     filter: brightness(0) saturate(100%) invert(46%) sepia(20%) saturate(1203%) opacity(80%);
 }

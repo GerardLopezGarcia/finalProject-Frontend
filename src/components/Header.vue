@@ -8,9 +8,10 @@
         <span >The housing App</span>
       </div>
       <div class="profile">
-        <router-link :to="`/profile/estudiante indeciso`">
+        <!-- acceso facil a los perfiles  -->
+        <!-- <router-link :to="`/profile/estudianteindeciso`">
             <a href="#">Become a host</a>
-        </router-link>
+        </router-link> -->
         <div class="color-mode" @click="changeColorMode()">
             {{colorModeIcon}}
         </div>

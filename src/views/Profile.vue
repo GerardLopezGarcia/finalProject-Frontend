@@ -30,27 +30,27 @@
                 </div>
                 <div class="bookings">
                     <div class="booked-house">
-                        <p>{{ houses[0].guestUser }} </p>
+                        <p>Booked by: {{ houses[0].guestUser.name }} </p>
                         <a class="cancel-booking" @click="unAssignHouse(1)"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>{{ houses[1].guestUser }}</p>
+                        <p>Booked by: {{ houses[1].guestUser }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>{{ houses[2].guestUser }}</p>
+                        <p>Booked by: {{ houses[2].guestUser }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>{{ houses[3].guestUser }}</p>
+                        <p>Booked by: {{ houses[3].guestUser}}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>{{ houses[4].guestUser }}</p>
+                        <p>Booked by: {{ houses[4].guestUser }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
                     <div class="booked-house">
-                        <p>{{ houses[5].guestUser }}</p>
+                        <p>Booked by: {{ houses[5].guestUser.name }}</p>
                         <a class="cancel-booking"><img src="../components/icons/cross.svg" style="width: 1.4rem;"></a>
                     </div>
 

@@ -122,5 +122,9 @@ h6 {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #b23e35;
 }
+.myButton-unavaliable:active {
+	position:relative;
+	top:.7rem;
+}
 
 </style>
